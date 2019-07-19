@@ -23,21 +23,12 @@ export default class SigninScreen extends React.Component {
     header: null
   };
 
-  signupUser = (name, email, password) => {
+  signInUser = (email, password) => {
     firebase
       .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(authenticate => {
-        return authenticate.user
-          .updateProfile({
-            displayName: name
-          })
-          .then(() => {
-            this.props.navigation.replace("Home");
-          })
-          .catch(error => {
-            alert(error.message);
-          });
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        this.props.navigation.replace("Home");
       })
       .catch(error => {
         alert(error.message);
@@ -53,7 +44,7 @@ export default class SigninScreen extends React.Component {
       >
         <View style={styles.logoContainer}>
           <Image source={require("../assets/logo.png")} />
-          <Text>Do Login</Text>
+          <Text>- By Saloni M Darji</Text>
         </View>
         <Form style={styles.form}>
           <Item floatingLabel>
@@ -73,7 +64,7 @@ export default class SigninScreen extends React.Component {
               autoCapitalize="none"
               autoCorrect={false}
               keyboardType="default"
-              onChangeText={email => this.setState({ email })}
+              onChangeText={password => this.setState({ password })}
             />
           </Item>
 
@@ -81,12 +72,9 @@ export default class SigninScreen extends React.Component {
             style={styles.button}
             full
             rounded
+            success
             onPress={() => {
-              this.signupUser(
-                this.state.name,
-                this.state.email,
-                this.state.password
-              );
+              this.signInUser(this.state.email, this.state.password);
             }}
           >
             <Text style={styles.buttonText}>Sign in</Text>
@@ -116,7 +104,7 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems: "center",
     marginTop: 100,
-    marginBottom: 100
+    marginBottom: 30
   },
   form: {
     padding: 20,

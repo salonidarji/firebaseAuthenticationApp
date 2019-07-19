@@ -24,6 +24,25 @@ export default class SignupScreen extends React.Component {
     header: null
   };
 
+  signupUser = (name, email, password) => {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(authenticate => {
+        return authenticate.user
+          .updateProfile({
+            displayName: name
+          })
+          .then(() => {
+            this.props.navigation.replace("Home");
+          });
+      })
+      .catch(error => {
+        alert(error.message);
+        console.log(error);
+      });
+  };
+
   render() {
     return (
       <KeyboardAvoidingView
@@ -33,7 +52,7 @@ export default class SignupScreen extends React.Component {
       >
         <View style={styles.logoContainer}>
           <Image source={require("../assets/logo.png")} />
-          <Text>Register Yourself</Text>
+          <Text>- By Saloni M Darji</Text>
         </View>
         <Form style={styles.form}>
           <Item floatingLabel>
@@ -62,12 +81,23 @@ export default class SignupScreen extends React.Component {
               secureTextEntry={true}
               autoCapitalize="none"
               autoCorrect={false}
-              keyboardType="default"
-              onChangeText={email => this.setState({ email })}
+              keyboardType="name-phone-pad"
+              onChangeText={password => this.setState({ password })}
             />
           </Item>
 
-          <Button style={styles.button} full rounded onPress={() => {}}>
+          <Button
+            style={styles.button}
+            full
+            rounded
+            onPress={() => {
+              this.signupUser(
+                this.state.name,
+                this.state.email,
+                this.state.password
+              );
+            }}
+          >
             <Text style={styles.buttonText}>Sign in</Text>
           </Button>
         </Form>
@@ -95,7 +125,7 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems: "center",
     marginTop: 100,
-    marginBottom: 100
+    marginBottom: 30
   },
   form: {
     padding: 20,

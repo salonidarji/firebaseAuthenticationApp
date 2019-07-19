@@ -10,13 +10,13 @@ import SignupScreen from "./screens/SignupScreen";
 import SigninScreen from "./screens/SigninScreen";
 
 var firebaseConfig = {
-  apiKey: "AIzaSyC0SwRV3im6Y4Tr-d4P2ZkBFoZCvDs8MwM",
-  authDomain: "reactapp-cb9b0.firebaseapp.com",
-  databaseURL: "https://reactapp-cb9b0.firebaseio.com",
-  projectId: "reactapp-cb9b0",
+  apiKey: "AIzaSyAC7z7gicEPRTssU7dnDgGkgwiujS3CU0Y",
+  authDomain: "fir-authproject-c3af7.firebaseapp.com",
+  databaseURL: "https://fir-authproject-c3af7.firebaseio.com",
+  projectId: "fir-authproject-c3af7",
   storageBucket: "",
-  messagingSenderId: "315585075766",
-  appId: "1:315585075766:web:0aae000438000b53"
+  messagingSenderId: "441917754320",
+  appId: "1:441917754320:web:535382f0be531eb9"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
